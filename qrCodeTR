@@ -1,0 +1,32 @@
+# QR kodu oluşturmak için qrcode kütüphanesini içe aktarıyoruz.
+import qrcode
+
+# Şu an QR kodu oluşturucuya geldiğinizi bildiren bir mesaj yazdırıyoruz.
+print("QR Kodu oluşturucuya geldiniz...")
+
+# Kullanıcıdan QR koduna dönüştürmek istediği içeriği (URL, metin veya sayı) alıyoruz.
+icerik = input("QR Kod içeriğiniz ne olsun? [URL, Metin veya bir sayı girebilirsiniz...]\nQR: ")
+
+# QR kodu oluşturmak için bir QRCode nesnesi oluşturuyoruz ve belirli ayarlarla yapılandırıyoruz.
+# Version: QR kodunun boyutunu belirleyen bir parametre.
+# Box size: QR kodunun kutu boyutunu belirleyen bir parametre.
+# Border: QR kodunun kenarlık boyutunu belirleyen bir parametre.
+# Error correction: QR kodunun hata düzeltme seviyesini belirleyen bir parametre.
+code = qrcode.QRCode(
+    version=1, box_size=50, border=10,
+    error_correction=qrcode.constants.ERROR_CORRECT_L)
+
+# Kullanıcının girdiği içeriği QR koduna ekliyoruz.
+code.add_data(icerik)
+
+# QR kodunu oluşturuyoruz.
+code.make(fit=True)
+
+# QR kodunu beyaz doldurma rengi ve kırmızı arka plan rengi ile bir resim olarak oluşturuyoruz.
+image = code.make_image(fill_color="black", back_color="white")
+
+# Oluşturulan QR kodunu "yourQRcode.png" adıyla kaydediyoruz.
+image.save("yourQRcode.png")
+
+# QR kodunun başarıyla oluşturulduğunu bildiren bir mesaj yazdırıyoruz.
+print("QR Kodu oluşturuldu...")

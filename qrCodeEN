@@ -1,0 +1,32 @@
+# Import the qrcode library to generate QR codes.
+import qrcode
+
+# Print a message indicating that you have arrived at the QR code generator.
+print("Welcome to the QR Code generator...")
+
+# Get the content (URL, text, or number) the user wants to convert to a QR code.
+content = input("What should be the content of the QR code? [You can enter URL, text, or a number...]\nQR: ")
+
+# Create a QRCode object to generate the QR code and configure it with specific settings.
+# Version: A parameter that determines the size of the QR code.
+# Box size: A parameter that determines the size of each box in the QR code.
+# Border: A parameter that determines the size of the border around the QR code.
+# Error correction: A parameter that determines the error correction level of the QR code.
+code = qrcode.QRCode(
+    version=1, box_size=50, border=10,
+    error_correction=qrcode.constants.ERROR_CORRECT_L)
+
+# Add the user's input content to the QR code.
+code.add_data(content)
+
+# Generate the QR code.
+code.make(fit=True)
+
+# Create the QR code as an image with a white fill color and a black background color.
+image = code.make_image(fill_color="black", back_color="white")
+
+# Save the generated QR code with the name "yourQRcode.png".
+image.save("yourQRcode.png")
+
+# Print a message indicating that the QR code has been successfully created.
+print("QR Code has been generated...")
